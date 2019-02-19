@@ -1,58 +1,59 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { ProductConsumer } from "../context";
-import { ButtonContainer } from "./Button";
-import { Link } from "react-router-dom";
-export default class Modal extends Component {
-  render() {
+import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import { ButtonContainer } from './Button'
+import { ProductConsumer } from '../context'
+
+
+class Modal extends React.Component {
+  render () {
     return (
       <ProductConsumer>
-        {value => {
-          const { modalOpen, closeModal } = value;
-          const { img, title, price } = value.modalProduct;
-          if (!modalOpen) {
-            return null;
-          } else {
-            return (
-              <ModalContainer>
-                <div className="container">
-                  <div className="row">
-                    <div
-                      className="col-8 mx-auto col-md-6 col-lg-4 p-5 text-center text-capitalize"
-                      id="modal"
-                    >
-                      <h5>item added to cart</h5>
-                      <img src={img} className="img-fluid" alt="" />
-                      <h5>{title}</h5>
-                      <h5 className="text-muted">price : ${price}</h5>
-                      <Link to="/">
-                        <ButtonContainer
-                          onClick={() => {
-                            closeModal();
-                          }}
-                        >
-                          Continue Shopping
-                        </ButtonContainer>
-                      </Link>
-                      <Link to="/cart">
-                        <ButtonContainer
-                          cart
-                          onClick={() => {
-                            closeModal();
-                          }}
-                        >
-                          Go To Cart
-                        </ButtonContainer>
-                      </Link>
+          {value => {
+            const {modalOpen,closeModal,addToCart} = value;
+            const { img, title, price } = value.modalProduct;
+            if(!modalOpen){
+                return null;
+            } else {
+              return (
+                <ModalContainer>
+                    <div className="container">
+                        <div className="row">
+                            <div
+                              className="col-8 mx-auto col-md-6 col-lg-4 p-5 text-center text-capitalize"
+                              id="modal"
+                              >
+                              <h5>item added to cart</h5>
+                              <img src={img} className="img-fluid" alt="" />
+                              <h5>{title}</h5>
+                              <h5 className="text-muted">price : ${price}</h5>
+                              <Link to="/">
+                                 <ButtonContainer
+                                   onClick={closeModal}
+                                   >
+                                   Continue shopping
+                                 </ButtonContainer>
+                              </Link>
+                              <Link to="/cart">
+                              <ButtonContainer
+                                cart
+                                onClick={() => {
+                                  closeModal();
+                                }}
+                              >
+                                Go To Cart
+                              </ButtonContainer>
+                            </Link>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </ModalContainer>
-            );
-          }
-        }}
+                </ModalContainer>
+              )
+            }
+          }}
       </ProductConsumer>
-    );
+    )
+
   }
 }
 
@@ -66,7 +67,9 @@ const ModalContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  #modal {
+  #modal{
     background: var(--mainWhite);
   }
-`;
+`
+
+export default Modal;

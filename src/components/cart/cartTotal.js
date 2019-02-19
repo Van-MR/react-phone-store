@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import PayPalButton from "./PayPalButton";
-import { Link } from "react-router-dom";
-export default class CartTotals extends Component {
-  render() {
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+class CartTotal extends React.Component {
+  render () {
     const {
+      cart,
       cartSubTotal,
       cartTax,
       cartTotal,
-      cart,
       clearCart
     } = this.props.value;
-    const { history } = this.props;
-    const emptyCart = cart.length === 0 ? true : false;
-    return (
-      <React.Fragment>
-        {!emptyCart && (
-          <div className="container">
+    const emptyCart = cart.length === 0 ? true :false;
+
+     return (
+       <React.Fragment>
+         {!emptyCart && (
+           <div className="container">
             <div className="row">
               <div className="col-10 mt-2 ml-sm-5 ml-md-auto col-sm-8 text-capitalize text-right">
                 <Link to="/">
@@ -41,16 +41,14 @@ export default class CartTotals extends Component {
                   <span className="text-title"> total :</span>{" "}
                   <strong>$ {cartTotal} </strong>
                 </h5>
-                <PayPalButton
-                  totalAmount={cartTotal}
-                  clearCart={clearCart}
-                  history={history}
-                />
+                
               </div>
             </div>
           </div>
-        )}
-      </React.Fragment>
-    );
+         )}
+       </React.Fragment>
+     )
   }
 }
+
+export default CartTotal;
